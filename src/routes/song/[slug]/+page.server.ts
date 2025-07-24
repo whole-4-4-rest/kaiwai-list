@@ -6,9 +6,8 @@ import path from 'path';
 
 export const load = async ({ params }) => {
     try {
-        // Path to the markdown file - different paths for dev and production
-        const contentPath = process.env.NODE_ENV === 'production' ? 'content' : 'static/content';
-        const filePath = path.join(process.cwd(), contentPath, 'songs', `${params.slug}.md`);
+        // Path to the markdown file - use content directory in root for both dev and production
+        const filePath = path.join(process.cwd(), 'content', 'songs', `${params.slug}.md`);
 
         // Check if file exists
         if (!fs.existsSync(filePath)) {
@@ -25,7 +24,7 @@ export const load = async ({ params }) => {
         let composerData = null;
         if (metadata.composer) {
             try {
-                const composerFilePath = path.join(process.cwd(), contentPath, 'composers', `${metadata.composer}.md`);
+                const composerFilePath = path.join(process.cwd(), 'content', 'composers', `${metadata.composer}.md`);
                 if (fs.existsSync(composerFilePath)) {
                     const composerFileContent = fs.readFileSync(composerFilePath, 'utf-8');
                     const { data: composerMetadata } = matter(composerFileContent);
