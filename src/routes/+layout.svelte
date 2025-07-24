@@ -8,7 +8,7 @@
 	<nav>
 		<a href="/">ホーム</a>
 		<a href="/search">検索</a>
-		<a href="https://github.com/whole-4-4-rest/kaiwai-list">曲を追加</a>
+		<a href="https://github.com/whole-4-4-rest/kaiwai-list/blob/main/static/content/CONTRIBUTING.md">曲を追加</a>
 		<a href="https://github.com/whole-4-4-rest/kaiwai-list">ウェブサイトの制作に貢献する</a>
 	</nav>
 </header>
