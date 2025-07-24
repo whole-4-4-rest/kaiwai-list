@@ -3,7 +3,7 @@
 
 	const { data } = $props();
 
-	const { Content, metadata, composer } = data;
+	const { Content, metadata, composer } = $derived(data);
 </script>
 
 <svelte:head>

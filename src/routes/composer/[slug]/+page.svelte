@@ -2,13 +2,7 @@
 	import { formatDate } from '../../../utils/formatDate.js';
 
 	const { data } = $props();
-	const { Content, metadata } = data;
-
-	const formattedDate = new Date(metadata.date).toLocaleDateString('ja-JP', {
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit'
-	});
+	const { Content, metadata } = $derived(data);
 </script>
 
 <svelte:head>
