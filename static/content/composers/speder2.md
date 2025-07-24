@@ -10,4 +10,4 @@ alias: ["ころんば", "Koronba", "koronba", "koronba sakamoto", "abnorok", "�
 ---
 
 # 概要  
-xxxxは、自作UTAU音源「ころんば4号」を駆使した界隈曲の原作者。
+Speder2はゲームサークル「ニシキガツオ」のサウンド担当。
