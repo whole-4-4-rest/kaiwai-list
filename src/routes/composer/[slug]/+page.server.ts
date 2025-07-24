@@ -6,8 +6,9 @@ import path from 'path';
 
 export const load = async ({ params }) => {
     try {
-        // Path to the markdown file in the static directory
-        const filePath = path.join(process.cwd(), 'static', 'content', 'composers', `${params.slug}.md`);
+        // Path to the markdown file - different paths for dev and production
+        const contentPath = process.env.NODE_ENV === 'production' ? 'content' : 'static/content';
+        const filePath = path.join(process.cwd(), contentPath, 'composers', `${params.slug}.md`);
 
         // Check if file exists
         if (!fs.existsSync(filePath)) {

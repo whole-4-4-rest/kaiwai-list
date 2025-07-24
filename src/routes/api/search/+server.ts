@@ -108,7 +108,9 @@ export const GET: RequestHandler = async ({ url }) => {
 	const searchTypes: ('song' | 'composer')[] = type ? [type] : ['song', 'composer'];
 	
 	for (const searchType of searchTypes) {
-		const directory = join(process.cwd(), 'static', 'content', `${searchType}s`);
+		// Path to content - different paths for dev and production
+		const contentPath = process.env.NODE_ENV === 'production' ? 'content' : 'static/content';
+		const directory = join(process.cwd(), contentPath, `${searchType}s`);
 		const files = await getMarkdownFiles(directory);
 		
 		for (const file of files) {
