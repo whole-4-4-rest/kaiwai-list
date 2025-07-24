@@ -1,7 +1,0 @@
-{
-  "functions": {
-    ".svelte-kit/vercel-tmp/index.js": {
-      "includeFiles": "content/**"
-    }
-  }
-}
