@@ -1,0 +1,17 @@
+body {
+    background-color: black;
+}
+
+@font-face {
+    font-family: "Kodenma";
+    src: url("../assets/fonts/KH-Dot-Kodenmachou-16.ttf") format("truetype");
+    font-weight: 200 800;
+    font-display: swap;
+}
+
+* {
+    color: white;
+    font-family: "Kodenma";
+
+    line-height: 2;
+}
