@@ -1,24 +1,17 @@
 import { error } from '@sveltejs/kit';
 import { marked } from 'marked';
-import matter from 'gray-matter';
-import fs from 'fs';
-import path from 'path';
+import { getContent } from '$lib/content';
 
 export const load = async ({ params }) => {
     try {
-        // Path to the markdown file - use content directory in root for both dev and production
-        const filePath = path.join(process.cwd(), 'content', 'composers', `${params.slug}.md`);
-
-        // Check if file exists
-        if (!fs.existsSync(filePath)) {
+        // Get content from pre-loaded cache
+        const contentData = getContent('composers', params.slug);
+        
+        if (!contentData) {
             throw error(404, 'Composer not found');
         }
-
-        // Read the markdown file
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-
-        // Parse frontmatter and content
-        const { data: metadata, content } = matter(fileContent);
+        
+        const { metadata, content } = contentData;
 
         // Convert markdown to HTML
         const htmlContent = marked(content, { breaks: true });

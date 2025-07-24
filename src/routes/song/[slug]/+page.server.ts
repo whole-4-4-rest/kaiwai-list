@@ -1,37 +1,24 @@
 import { error } from '@sveltejs/kit';
 import { marked } from 'marked';
-import matter from 'gray-matter';
-import fs from 'fs';
-import path from 'path';
+import { getContent } from '$lib/content';
 
 export const load = async ({ params }) => {
     try {
-        // Path to the markdown file - use content directory in root for both dev and production
-        const filePath = path.join(process.cwd(), 'content', 'songs', `${params.slug}.md`);
-
-        // Check if file exists
-        if (!fs.existsSync(filePath)) {
+        // Get content from pre-loaded cache
+        const contentData = getContent('songs', params.slug);
+        
+        if (!contentData) {
             throw error(404, 'Article not found');
         }
-
-        // Read the markdown file
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-
-        // Parse frontmatter and content
-        const { data: metadata, content } = matter(fileContent);
+        
+        const { metadata, content } = contentData;
 
         // Load composer data if composer is specified
         let composerData = null;
         if (metadata.composer) {
-            try {
-                const composerFilePath = path.join(process.cwd(), 'content', 'composers', `${metadata.composer}.md`);
-                if (fs.existsSync(composerFilePath)) {
-                    const composerFileContent = fs.readFileSync(composerFilePath, 'utf-8');
-                    const { data: composerMetadata } = matter(composerFileContent);
-                    composerData = composerMetadata;
-                }
-            } catch (err) {
-                console.error('Error loading composer data:', err);
+            const composerContent = getContent('composers', metadata.composer);
+            if (composerContent) {
+                composerData = composerContent.metadata;
             }
         }
 
